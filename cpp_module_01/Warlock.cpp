@@ -1,6 +1,17 @@
 #include "Warlock.hpp"
 
-Warlock::Warlock( void ){}
+Warlock::Warlock( void )
+{
+
+}
+
+Warlock::Warlock(std::string const &n, std::string const &t)
+{
+	name = n;
+	title = t;
+	std::cout << name << ": This looks like another boring day." << std::endl;
+}
+
 Warlock::Warlock(const Warlock& op)
 {
 	name = op.name;
@@ -22,26 +33,19 @@ Warlock::~Warlock()
 	std::cout << name << ": My job here is done!" << std::endl;
 }
 
-Warlock::Warlock(std::string const &n, std::string const &t)
-{
-	name = n;
-	title = t;
-	std::cout << name << ": This looks like another boring day." << std::endl;
-}
-
 std::string const &Warlock::getName( void ) const
 {
-	return (this->name);
+	return (name);
 }
 
 std::string const &Warlock::getTitle( void ) const
 {
-	return (this->title);
+	return (title);
 }
 
 void Warlock::setTitle(std::string const &t)
 {
-	this->title = t;
+	title = t;
 }
 
 void Warlock::introduce( void ) const
@@ -53,24 +57,24 @@ void Warlock::learnSpell(ASpell* spell)
 {
 	if (spell)
 	{
-		library.insert(std::pair<std::string, ASpell*>(spell->getName(), spell->clone()));
+		book.insert(std::pair<std::string, ASpell*>(spell->getName(), spell->clone()));
 	}
 }
 
 void Warlock::forgetSpell(std::string s)
 {
-	std::map<std::string, ASpell*>::iterator it = library.find(s);
-	if (it != library.end())
+	std::map<std::string, ASpell*>::iterator it = book.find(s);
+	if (it != book.end())
 	{
 		delete it->second;
-		library.erase(s);
+		book.erase(s);
 	}
 }
 
 void Warlock::launchSpell(std::string s, ATarget& tar)
 {
-	std::map<std::string, ASpell*>::iterator it = library.find(s);
-	if (it != library.end())
+	std::map<std::string, ASpell*>::iterator it = book.find(s);
+	if (it != book.end())
 	{
 		it->second->launch(tar);
 	}

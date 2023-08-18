@@ -52,3 +52,26 @@ void Warlock::introduce( void ) const
 {
 	std::cout << name << ": I am " << name << ", " << title << "!" << std::endl;
 }
+
+void Warlock::learnSpell(ASpell* spell)
+{
+	book.learnSpell(spell);
+}
+
+void Warlock::forgetSpell(std::string s)
+{
+	book.forgetSpell(s);
+}
+
+void Warlock::launchSpell(std::string s, ATarget const & tar)
+{
+	ATarget  const *t = 0;
+	if (t == &tar)
+		return;
+	ASpell* spell = book.createSpell(s);
+	std::cout << "eka" << std::endl;
+	if (spell)
+	{
+		spell->launch(tar);
+	}
+}

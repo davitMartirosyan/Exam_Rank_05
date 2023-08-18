@@ -44,5 +44,6 @@ std::string const &ASpell::getEffects( void ) const
 
 void ASpell::launch(ATarget const &tar)
 {
+	std::cout << "stex el eka" << std::endl;
 	tar.getHitBySpell(*this);
 }
